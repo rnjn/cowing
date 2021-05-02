@@ -111,7 +111,6 @@ func main() {
 
 func GetDate(loc *time.Location, offset int) string {
 	istNow := time.Now().AddDate(0,0,1*offset).In(loc)
-	fmt.Printf("Script last pinged at %v\n", istNow)
 	year, month, day := istNow.Date()
 	todayString := fmt.Sprintf("%02d-%02d-%d", day, month, year)
 	return todayString
@@ -179,7 +178,7 @@ func callCowin(url string) {
 					fmt.Printf("Date:\t\t\t %s \n", covidData.Centers[i].Sessions[j].Date)
 					fmt.Printf("Available Capacity:\t %f \n", covidData.Centers[i].Sessions[j].AvailableCapacity)
 					fmt.Printf("Vaccine type:\t %s \n", covidData.Centers[i].Sessions[j].Vaccine)
-					msgBody := fmt.Sprintf("Center Name: %s \nAvailable Capacity: %f", covidData.Centers[i].Name, covidData.Centers[i].Sessions[j].AvailableCapacity)
+					msgBody := fmt.Sprintf("Date: %s \nCenter Name: %s \nAvailable Capacity: %f", covidData.Centers[i].Sessions[j].Date, covidData.Centers[i].Name, covidData.Centers[i].Sessions[j].AvailableCapacity)
 					err := beeep.Alert("Found a center", msgBody, "assets/information.png")
 					if err != nil {
 						panic(err)
